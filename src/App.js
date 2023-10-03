@@ -46,7 +46,7 @@ function App() {
     }
   }
   return (
-    <>
+    <>  
     <BrowserRouter>
       {/* <Navbar title="TextUtils" aboutText="About TextUtils"/> */}
       {/* <Navbar/> */}
@@ -55,7 +55,7 @@ function App() {
       <div className="container my-5">
         <Routes>
           <Route path="/" element={<TextForm showAlert={showAlert} mode={mode} heading="Enter the Text" />}></Route>
-          <Route path="/about" element={<About />}></Route>
+          <Route path="/about" element={<About showAlert={showAlert} mode={mode} />}></Route>
         </Routes>
       </div>
     </BrowserRouter>

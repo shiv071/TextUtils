@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-
+  
 export default function TextForm(props) {
     const [text, setText] = useState("")
 
@@ -54,10 +54,8 @@ export default function TextForm(props) {
     }
 
     const handleCopy =()=>{
-        var text = document.getElementById("myBox");
-        text.select();
-        navigator.clipboard.writeText(text.value);
-        props.showAlert("Text has been copied","success");
+        navigator.clipboard.writeText(text);
+        props.showAlert("Copied to clipboard","success");
     }
 
     const handleOnChange = (event) => {
@@ -67,7 +65,7 @@ export default function TextForm(props) {
 
     const count = ()=>{
         if (text.length>0){
-            return text.trim().split(/[ ]+/).length;
+            return text.trim().split(/\s+/).length;
         }
         else{
             return 0;
@@ -80,15 +78,15 @@ export default function TextForm(props) {
             <div className='container' style={{color:props.mode==='dark'?'white':'black'}}>
                 <h1>{props.heading}</h1>
                 <div className="mb-3">
-                    <textarea className="form-control" value={text} style={{color:props.mode==='dark'?'white':'black',backgroundColor:props.mode==='dark'?'gray':'white'}} onChange={handleOnChange} placeholder="Leave a comment here" id="myBox" rows={8}></textarea>
+                    <textarea className="form-control" value={text} style={{color:props.mode==='dark'?'white':'black',backgroundColor:props.mode==='dark'?'#404742':'white'}} onChange={handleOnChange} id="myBox" rows={8}></textarea>
                 </div>
-                <button className="btn btn-primary" onClick={handleClickUpper}>UpperCase</button>
-                <button className="btn btn-primary mx-2" onClick={handleClickLower}>LowerCase</button>
-                <button className="btn btn-primary mx-2" onClick={handleClickClear}>Clear Text</button>
-                <button className="btn btn-primary mx-2" onClick={handleClickSent}>SentenceCase</button>
-                <button className="btn btn-primary mx-2" onClick={handleDownload}>Download Text</button>
-                <button className="btn btn-primary mx-2" onClick={handleRemoveBlank}>Remove Blank</button>
-                <button className="btn btn-primary mx-2" onClick={handleCopy}>Copy Text</button>
+                <button disabled={text.length===0} className="btn btn-primary mx-1 my-1" onClick={handleClickUpper}>UpperCase</button>
+                <button disabled={text.length===0} className="btn btn-primary mx-1 my-1" onClick={handleClickLower}>LowerCase</button>
+                <button disabled={text.length===0} className="btn btn-primary mx-1 my-1" onClick={handleClickClear}>Clear Text</button>
+                <button disabled={text.length===0} className="btn btn-primary mx-1 my-1" onClick={handleClickSent}>SentenceCase</button>
+                <button disabled={text.length===0} className="btn btn-primary mx-1 my-1" onClick={handleDownload}>Download Text</button>
+                <button disabled={text.length===0} className="btn btn-primary mx-1 my-1" onClick={handleRemoveBlank}>Remove Blank</button>
+                <button disabled={text.length===0} className="btn btn-primary mx-1 my-1" onClick={handleCopy}>Copy Text</button>
             </div>
 
             <div className="container my-3" style={{color:props.mode==='dark'?'white':'black'}}>
@@ -96,7 +94,7 @@ export default function TextForm(props) {
                 <p>{count()} words and {text.length} characters</p>
                 <p>{0.008 * count()}min reading time</p>
                 <h2>Preview</h2>
-                <p>{text.length>0?text:"Enter something in textArea to preview your text."}</p>
+                <p>{text.length>0?text:"Nothing to preview."}</p>
             </div>
         </>
     )
